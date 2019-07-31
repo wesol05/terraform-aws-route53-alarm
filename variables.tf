@@ -29,7 +29,7 @@ variable "period" {
   default = 60
   description = "The period in seconds over which the specified statistic is applied."
 }
-variable "evaluation_period" {
+variable "evaluation_periods" {
   default = 1
   description = "The number of periods over which data is compared to the specified threshold."
 }
