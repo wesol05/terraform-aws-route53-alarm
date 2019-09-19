@@ -9,10 +9,10 @@ data "aws_sns_topic" "topic" {
 resource "aws_route53_health_check" "health_check" {
   count = var.enabled ? 1 : 0
 
-  type          = "HTTPS"
+  type          = var.https ? "HTTPS" : "HTTP"
   fqdn          = var.domain
   resource_path = var.path
-  port          = 443
+  port          = var.https ? 443 : 80
 
   failure_threshold = var.failure_threshold
   request_interval = var.request_interval

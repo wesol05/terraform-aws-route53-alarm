@@ -16,6 +16,10 @@ variable "request_interval" {
   default = 30
   description = "The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request."
 }
+variable "https" {
+  default = true
+  description = "Use https or http."
+}
 variable "enabled" {
   type = bool
   default = true
