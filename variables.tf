@@ -25,7 +25,7 @@ variable "enabled" {
   default = true
 }
 variable "tags" {
-  type = "map"
+  type = map
   default = {}
   description = "Tags attached to created resources."
 }

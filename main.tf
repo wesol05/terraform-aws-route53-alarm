@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
 data "aws_sns_topic" "topic" {
   name = var.sns-topic
 }
@@ -14,6 +10,7 @@ resource "aws_route53_health_check" "health_check" {
   resource_path = var.path
   port          = var.https ? 443 : 80
 
+  cloudwatch_alarm_region = "us-east-1"
   failure_threshold = var.failure_threshold
   request_interval = var.request_interval
 
@@ -35,7 +32,6 @@ resource "aws_cloudwatch_metric_alarm" "alarm" {
   }
   metric_name = "HealthCheckStatus"
   namespace = "AWS/Route53"
-
 
   alarm_actions = [ data.aws_sns_topic.topic.arn ]
 
