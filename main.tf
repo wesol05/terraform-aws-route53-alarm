@@ -1,7 +1,3 @@
-data "aws_sns_topic" "topic" {
-  name = var.sns-topic
-}
-
 resource "aws_route53_health_check" "health_check" {
   count = var.enabled ? 1 : 0
 
@@ -33,7 +29,7 @@ resource "aws_cloudwatch_metric_alarm" "alarm" {
   metric_name = "HealthCheckStatus"
   namespace = "AWS/Route53"
 
-  alarm_actions = [ data.aws_sns_topic.topic.arn ]
+  alarm_actions = [ ]
 
   tags = var.tags
 }
