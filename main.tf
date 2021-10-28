@@ -1,6 +1,4 @@
 resource "aws_route53_health_check" "health_check" {
-  count = var.enabled ? 1 : 0
-
   type          = var.https ? "HTTPS" : "HTTP"
   fqdn          = var.domain
   resource_path = var.path
@@ -14,7 +12,6 @@ resource "aws_route53_health_check" "health_check" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "alarm" {
-  count = var.enabled ? 1 : 0
   alarm_name = var.domain
   comparison_operator = "LessThanThreshold"
   evaluation_periods = var.evaluation_periods
@@ -28,8 +25,6 @@ resource "aws_cloudwatch_metric_alarm" "alarm" {
   }
   metric_name = "HealthCheckStatus"
   namespace = "AWS/Route53"
-
-  alarm_actions = [ ]
 
   tags = var.tags
 }
